@@ -11,6 +11,10 @@ migrate = Migrate(app, db)
 
 db.init_app(app)
 
+# Ensure tables exist for tests and local runs without migrations
+with app.app_context():
+    db.create_all()
+
 
 @app.route('/')
 def index():
